@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
+@import url('https://fonts.googleapis.com/css?family=Baloo+2|Rock+Salt&display=swap');
 
 :root {
     --fretboard-height: 350;
@@ -19,12 +19,50 @@
 
 body {
     background: #353535;
-    font-family: Lato, sans-serif;
+    font-family: 'Baloo 2', cursive;
+}
+
+a:link {
+    text-decoration: none;
+    color: silver;
+}
+  
+a:visited {
+    text-decoration: none;
+    color: silver;
+}
+  
+a:hover {
+    text-decoration: underline;
+    color: silver;
+}
+  
+a:active {
+    text-decoration: underline;
+    color: silver;
+}
+
+.logo {
+    text-align: center;
+    color: #fbc531;
+    font-size: xx-large;
+    font-family: 'Rock Salt', cursive;
+}
+
+.logo h5 {
+    color: silver;
+    font-family: 'Baloo 2', cursive;
+    padding: 10px;
+    padding-bottom: 40px;
+}
+
+footer {
+    color: silver;
 }
 
 .settings {
     display: flex;
-    color: white;
+    color: silver;
     padding: 20px;
     border-bottom: 1px solid #444;
     background: #282828;
@@ -32,7 +70,7 @@ body {
 .fretboard {
     display: flex;
     flex-direction: column;
-    background: #be975b;
+    background: #44322d;
     width: 100%;
     height: calc(var(--fretboard-height) * 1px);
     margin-top: 50px;
@@ -49,7 +87,7 @@ body {
     content: '';
     width: 100%;
     height: calc(var(--string-height) * 1px);
-    background: linear-gradient(#eee, #999);
+    background: linear-gradient(#333, #999);
     box-shadow: 76px 3px 10px #806233;
     z-index: 1;
     position: absolute;
@@ -83,10 +121,11 @@ body {
     border-radius: 50%;
     line-height: 33px;
     text-align: center;
-    background: teal;
+    background: #3498db;
     z-index: 2;
     color: #eee;
     opacity: var(--noteDotOpacity);
+    cursor: pointer;
 }
 
 .single-fretmark:after, .double-fretmark:before, .double-fretmark:after {
@@ -95,7 +134,7 @@ body {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: #806233;
+    background: silver;
 }
 
 .single-fretmark:after {
@@ -111,4 +150,42 @@ body {
 .double-fretmark:after {
     top: calc(var(--double-fretmark-position-2) * 1px);
     transform: translate(-140%,  -50%);
+}
+
+#accidentals-radio, #instrument-selector, #fret-increase, #fret-decrease, #show-all, #show-multiple {
+    cursor: pointer;
+}
+
+#instrument-selector {
+    width: 100px;
+    list-style: none; 
+}
+
+
+#fret-decrease, #fret-increase {
+    border-radius: 50%;
+    padding: 5px;
+    margin: 10px;
+}
+
+.settings-element {
+    display: flex;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+label {
+    margin: 5px;
+}
+
+.instructions {
+    color: silver;
+    font-size: xx-large;
+    text-align: center;
+    padding: 40px;
+}
+
+#reset-tuning {
+    border-radius: 15px;
+    padding: 5px;
 }

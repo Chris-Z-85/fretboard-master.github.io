@@ -5,18 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <title>Fretboard</title>
+    <script src="https://kit.fontawesome.com/c286c22c5a.js" crossorigin="anonymous"></script>
+    <title>Fretboard Master</title>
 </head>
 
 <body>
+    <div class="logo">
+        <h1>Fretboard Master</h1>
+        <h5>Memorize fretboard notes the fun way!</h5>
+    </div>
+
     <div class="settings">
-        <label for="instrument-selector">Selected instrument:</label>
-        <select name="instrument-selector" id="instrument-selector"></select>
+
+        <div class="settings-element">
+            <i class="fas fa-sliders-h"></i>
+            <input type="radio" name="flat-sharp" value="flats" checked id="accidentals-radio">
+            <label>♭</label>
+            <input type="radio" name="flat-sharp" value="sharps" id="accidentals-radio">
+            <label>♯</label>
+        </div>
+
+        <div class="settings-element">
+            <label for="instrument-selector">Selected instrument:</label>
+            <select name="instrument-selector" id="instrument-selector"></select>
+        </div>
+
+        <div class="settings-element">
+            <button id="fret-decrease">-</button>
+            <div id="fret-numbers"></div>
+            <button id="fret-increase">+</button>
+        </div>
+
+        <div class="settings-element">
+            <div>
+                <input type="checkbox" id="show-all">
+                <label for="show-all">Show all</label>
+            </div>
+            <div>
+                <input type="checkbox" id="show-multiple">
+                <label for="show-multiple">Show multiple</label>
+            </div>
+        </div>
+
+        <div class="settings-element">
+            <label for="tuning-selector">Tuning:</label>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <select name="tuning-selector" id="tuning-selector"></select>
+            <button id="reset-tuning">Reset tuning</button>
+        </div>
 
     </div>
-    <div class="fretboard">
 
+    <div class="fretboard"></div>
+
+    <div id="show-multiple-bar"></div>
+
+    <div class="instructions">
+        <h6>The Fretboard Master is the tool designed to help you memorize the fret note names in an easy and fun way!
+        </h6>
+        <h6>How to use:</h6>
+        <i class="fas fa-music"></i>
+        <i class="fas fa-guitar"></i>
+        <i class="fas fa-trophy"></i>
+        <i class="fas fa-info"></i>
     </div>
+
+    <footer>
+        <p>Created by
+            <a href="https://github.com/Chris-Z-85">Chris Zbrojkiewcz</a>
+            at
+            <a href="https://www.spiced-academy.com/">SPICED Academy, </a>2020</p>
+    </footer>
+
     <script src="./app.js"></script>
 </body>
 
