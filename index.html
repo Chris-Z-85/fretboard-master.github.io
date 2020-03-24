@@ -16,9 +16,11 @@
     </div>
 
     <div class="settings">
-
         <div class="settings-element">
             <i class="fas fa-sliders-h"></i>
+        </div>
+
+        <div class="settings-element">
             <input type="radio" name="flat-sharp" value="flats" checked id="accidentals-radio">
             <label>♭</label>
             <input type="radio" name="flat-sharp" value="sharps" id="accidentals-radio">
@@ -31,6 +33,7 @@
         </div>
 
         <div class="settings-element">
+            <label for="fret-numbers">Fret number:</label>
             <button id="fret-decrease">-</button>
             <div id="fret-numbers"></div>
             <button id="fret-increase">+</button>
@@ -49,29 +52,42 @@
 
         <div class="settings-element">
             <label for="tuning-selector">Tuning:</label>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <select name="tuning-selector" id="tuning-selector"></select>
-            <button id="reset-tuning">Reset tuning</button>
+            <div id="tuning-selectors">
+
+            </div>
+            <button id="reset-tuning">RESET</button>
         </div>
 
+        <div class="settings-element">
+            <a href="#how_to_play"><i class=" fas fa-info"></i></a>
+        </div>
+    </div>
+
+    <div class="game-nav-container">
+        <div class="time-box">Time left: <p id="time">30</p> seconds</div>
+        <div class="note-box">Get ready!</div>
+        <div class="score-box">Your score: <p id="points">0</p> points</div>
     </div>
 
     <div class="fretboard"></div>
 
-    <div id="show-multiple-bar"></div>
+    <div id="show-multiple-bar">C D♭ D E♭ E F G♭ G A♭ A B♭ B</div>
+
+    <div class="game-container">
+        <button id="start-game-button">PLAY GAME</button>
+    </div>
 
     <div class="instructions">
-        <h6>The Fretboard Master is the tool designed to help you memorize the fret note names in an easy and fun way!
-        </h6>
-        <h6>How to use:</h6>
-        <i class="fas fa-music"></i>
-        <i class="fas fa-guitar"></i>
-        <i class="fas fa-trophy"></i>
-        <i class="fas fa-info"></i>
+        <h4>
+            The Fretboard Master is a tool designed to help you memorize the fret note names in an easy and fun way!
+        </h4>
+        <p id="how_to_play">How to play? It’s easy!</p>
+        <p>When the note <i class="fas fa-music"></i> is displayed find it and clic on it on the fretboard. <i
+                class="fas fa-guitar"></i>
+
+            <p>Be quick you have only 30
+                seconds! <i class="fas fa-trophy"></i></p>
+            <p>Good luck!</p>
     </div>
 
     <footer>

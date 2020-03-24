@@ -57,16 +57,37 @@ a:active {
 }
 
 footer {
+    margin-left: 15px;
     color: silver;
 }
 
 .settings {
     display: flex;
+    justify-content: space-evenly;
+    align-content: center;
     color: silver;
+    font-size: 18px;
     padding: 20px;
+    border-top: 1px solid #444;
     border-bottom: 1px solid #444;
     background: #282828;
 }
+
+.settings-element {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.settings-element label {
+    margin-right: 15px;
+}
+
+.settings-element i {
+    font-size: xx-large;
+}
+
 .fretboard {
     display: flex;
     flex-direction: column;
@@ -156,22 +177,16 @@ footer {
     cursor: pointer;
 }
 
-#instrument-selector {
-    width: 100px;
-    list-style: none; 
-}
-
-
 #fret-decrease, #fret-increase {
     border-radius: 50%;
+    width: 30px;
     padding: 5px;
     margin: 10px;
-}
-
-.settings-element {
-    display: flex;
-    margin-right: 40px;
-    margin-left: 40px;
+    font-size: 15px;
+    border: 0;
+    background: teal;
+    color: silver;
+    font-weight: bold
 }
 
 label {
@@ -180,12 +195,96 @@ label {
 
 .instructions {
     color: silver;
-    font-size: xx-large;
+    font-size: x-large;
     text-align: center;
-    padding: 40px;
+    padding: 20px;
+    margin-top: 40px;
 }
+
+.instructions p {
+    padding-top: 10px;
+    font-size: large;
+    letter-spacing: 1px;
+}
+
+#tuning-selector, #instrument-selector  {
+    margin: 10px;
+    background: #353535;
+    color: silver;
+    font-size: 18px;
+    font-family: 'Baloo 2';
+    border: 0;
+}
+
+#instrument-selector select {
+    display: none;
+    font-family: 'Baloo 2';
+  }
 
 #reset-tuning {
     border-radius: 15px;
-    padding: 5px;
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 0;
+    background: teal;
+    color: silver;
+    font-weight: bold
 }
+
+#show-multiple-bar{
+    color: silver;
+    font-size: xx-large;
+    text-align: center;
+    padding: 40px; 
+    letter-spacing: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.single-note{
+    opacity: 0.7;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.single-note:hover{
+    opacity: 1;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#start-game-button {
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 0;
+    background: #fbc531;
+    color: black;
+    text-shadow:0px 1px 0px #e6d977;
+    font-weight: bold
+}
+
+#start-game-button:active {
+	position:relative;
+	top:1px;
+}
+
+.game-nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: silver;
+    font-size: x-large;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+
