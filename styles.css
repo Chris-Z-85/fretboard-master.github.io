@@ -71,6 +71,7 @@ footer {
     border-top: 1px solid #444;
     border-bottom: 1px solid #444;
     background: #282828;
+    /* font-family: 'Baloo 2' !important; */
 }
 
 .settings-element {
@@ -173,7 +174,7 @@ footer {
     transform: translate(-140%,  -50%);
 }
 
-#accidentals-radio, #instrument-selector, #fret-increase, #fret-decrease, #show-all, #show-multiple {
+#tuning-selectors select, .settings-element{
     cursor: pointer;
 }
 
@@ -207,13 +208,26 @@ label {
     letter-spacing: 1px;
 }
 
-#tuning-selector, #instrument-selector  {
+#tuning-selectors select, #instrument-selector  {
     margin: 10px;
     background: #353535;
     color: silver;
     font-size: 18px;
     font-family: 'Baloo 2';
     border: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+#tuning-selectors select:hover, #instrument-selector:hover  {
+    border-color: white;
+}
+
+#tuning-selectors select {
+    margin-right: 10px;
+    width: 50px;
 }
 
 #instrument-selector select {
@@ -237,20 +251,17 @@ label {
     font-size: xx-large;
     text-align: center;
     padding: 40px; 
-    letter-spacing: 3px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    
 }
 
 .single-note{
     opacity: 0.7;
     margin-left: 5px;
-    margin-right: 5px;
-}
-
-.single-note:hover{
-    opacity: 1;
+    margin-right: 20px;
+    letter-spacing: 0px;
 }
 
 .game-container {
@@ -287,4 +298,26 @@ label {
     padding-left: 40px;
 }
 
+.note-box {
+    font-size: 35px;
+}
 
+.game-popup {
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    border: 3px solid black;
+    background-color: #282828;;
+    color: silver;
+    border-radius: 15px;
+    z-index: 9;
+  }
+
+  .popup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    max-width: 900px;
+    padding: 60px;
+  }

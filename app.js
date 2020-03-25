@@ -3,27 +3,27 @@ let numberOfFrets = 12;
 
 const fretboard = document.querySelector('.fretboard');
 const selectedInstrumentSelector = document.querySelector('#instrument-selector');
-const flatSharpSelector = document.querySelectorAll("input[name='flat-sharp']")
+const flatSharpSelector = document.querySelectorAll("input[name='flat-sharp']");
 
 const fretNumbersDiv = document.querySelector("#fret-numbers");
 fretNumbersDiv.innerText = numberOfFrets;
 const fretDecrease = document.querySelector("#fret-decrease");
 const fretIncrease = document.querySelector("#fret-increase");
 
-const showAllCheckbox = document.querySelector("#show-all")
-const showMultipleCheckbox = document.querySelector("#show-multiple")
-const showMultipleBar = document.querySelector("#show-multiple-bar")
-const tuningSelectorsDiv = document.querySelector("#tuning-selectors")
+const showAllCheckbox = document.querySelector("#show-all");
+const showMultipleCheckbox = document.querySelector("#show-multiple");
+const showMultipleBar = document.querySelector("#show-multiple-bar");
+const tuningSelectorsDiv = document.querySelector("#tuning-selectors");
 
-const resetTuningBt = document.querySelector("#reset-tuning")
-const startGameBt = document.querySelector("#start-game-button")
-const noteBoxDiv = document.querySelector(".note-box")
-const pointsP = document.querySelector("#points")
-const timeP = document.querySelector("#time")
+const resetTuningBt = document.querySelector("#reset-tuning");
+const startGameBt = document.querySelector("#start-game-button");
+const noteBoxDiv = document.querySelector(".note-box");
+const pointsP = document.querySelector("#points");
+const timeP = document.querySelector("#time");
 
 
 
-let accidentals = "flats"
+let accidentals = "flats";
 
 const singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
 const doubleFretMarkPositions = [12, 24];
@@ -36,7 +36,7 @@ const instrumentTuningPresetsDefault = {
     'Bass (4 strings)': [7, 2, 9, 4],
     'Bass (5 strings)': [7, 2, 9, 4, 11],
     'Ukulele': [9, 4, 0, 7]
-}
+};
 
 
 
@@ -45,25 +45,27 @@ const instrumentTuningPresets = {
     'Bass (4 strings)': [7, 2, 9, 4],
     'Bass (5 strings)': [7, 2, 9, 4, 11],
     'Ukulele': [9, 4, 0, 7]
-}
+};
 
 
 let selectedInstrument = 'Guitar';
 let numberOfStrings = instrumentTuningPresets[selectedInstrument].length;
 
-let noteHoverBlocked = false
-let showMultiple = false
-let gameStarted = false
-let points = 0
+let noteHoverBlocked = false;
+let showMultiple = false;
+let gameStarted = false;
+let points = 0;
 
 let interval;
-let actualTime = 30;
+let timeout1;
+let timeout2;
+
+let actualTime = 15;
 let randomNote = "";
 
 
 
 const app = {
-
     init() {
         this.setupFretboard();
         this.setupSelectedInstrumentSelector();
@@ -113,10 +115,40 @@ const app = {
     },
     startGame() {
         gameStarted = true
-        this.setRandomNote()
 
-        actualTime = 30
-        interval = setInterval(this.updateTime, 1000)
+
+        actualTime = 15
+        noteBoxDiv.innerText = "Let's go!"
+        timeout1 = setTimeout(() => {
+            noteBoxDiv.innerText = "Find!"
+
+            timeout2 = setTimeout(() => {
+                interval = setInterval(this.updateTime, 1000)
+                this.setRandomNote()
+
+                timeP.innerText = "Time left: " + actualTime + " seconds"
+                pointsP.innerText = "Your score: 0 points"
+            }, 1000)
+        }, 1000)
+
+    },
+    endGame() {
+        gameStarted = false
+        clearInterval(interval)
+
+        clearTimeout(timeout1)
+        clearTimeout(timeout2)
+
+        popup.setPopupText("Game Over!")
+        popup.setPoints(points)
+        popup.showPopup()
+
+        pointsP.innerText = ""
+        timeP.innerText = ""
+        noteBoxDiv.innerText = ""
+
+        actualTime = 15
+        points = 0
     },
     nextRound() {
         this.showMultiple(randomNote)
@@ -124,23 +156,33 @@ const app = {
         setTimeout(() => {
             clearInterval(interval)
             this.hideAll()
-
-            actualTime = 30
+            actualTime = 15
             interval = setInterval(this.updateTime, 1000)
             this.setRandomNote()
+
         }, 1000)
 
 
     },
     updateTime() {
         actualTime -= 1
-        timeP.innerText = actualTime
+        timeP.innerText = "Time left: " + actualTime + ' seconds'
 
         if (actualTime == 0) {
             gameStarted = false
-            alert("Koniec gry. Punkty: " + points)
+
+            pointsP.innerText = ""
+            timeP.innerText = ""
+            noteBoxDiv.innerText = ""
+
+            actualTime = 15
+            points = 0
+
+            popup.setPopupText("Time's up!")
+            popup.setPoints(points)
+            popup.showPopup()
             clearInterval(interval)
-        }
+        };
 
     },
     updateInstrumentTuning(index, indexOfNote) {
@@ -153,13 +195,12 @@ const app = {
     setupFretboard() {
         fretboard.innerHTML = '';
         root.style.setProperty('--number-of-strings', numberOfStrings);
-        // Add strings to fretboard
+
         for (let i = 0; i < numberOfStrings; i++) {
             let string = tools.createElement('div');
             string.classList.add('string');
             fretboard.appendChild(string);
 
-            // Create frets
             for (let fret = 0; fret <= numberOfFrets; fret++) {
                 let noteFret = tools.createElement('div');
                 noteFret.classList.add('note-fret');
@@ -168,18 +209,16 @@ const app = {
                 let noteName = this.generateNoteNames((fret + instrumentTuningPresets[selectedInstrument][i]), accidentals);
                 noteFret.setAttribute('data-note', noteName);
 
-                // Add single fret marks
                 if (i === 0 && singleFretMarkPositions.indexOf(fret) !== -1) {
                     noteFret.classList.add('single-fretmark');
                 }
-                // Add double fret marks
                 if (i === 0 && doubleFretMarkPositions.indexOf(fret) !== -1) {
                     let doubleFretMark = tools.createElement('div');
                     doubleFretMark.classList.add('double-fretmark');
                     noteFret.appendChild(doubleFretMark);
-                }
-            }
-        }
+                };
+            };
+        };
     },
     generateNoteNames(noteIndex, accidentals) {
         noteIndex = noteIndex % 12;
@@ -195,7 +234,7 @@ const app = {
         for (instrument in instrumentTuningPresets) {
             let instrumentOption = tools.createElement('option', instrument);
             selectedInstrumentSelector.appendChild(instrumentOption);
-        }
+        };
     },
     showMultiple(note) {
         const noteFrets = document.querySelectorAll(".note-fret")
@@ -204,14 +243,14 @@ const app = {
             if (noteFret.dataset.note == note) {
                 noteFret.style.setProperty('--noteDotOpacity', 1);
             }
-        })
+        });
     },
     hideAll() {
         const noteFrets = document.querySelectorAll(".note-fret")
 
         noteFrets.forEach(noteFret => {
             noteFret.style.setProperty('--noteDotOpacity', 0);
-        })
+        });
     },
     initShowMultipleBar() {
         showMultipleBar.innerHTML = ""
@@ -228,16 +267,26 @@ const app = {
             div.classList.add("single-note")
             div.innerText = note
 
-            div.addEventListener("mouseover", () => {
+            div.addEventListener("mouseover", (event) => {
+                if (gameStarted) return
+
+                event.target.style.color = "#3498db"
+                event.target.style.cursor = "pointer"
+
                 this.showMultiple(note)
             })
 
-            div.addEventListener("mouseout", () => {
+            div.addEventListener("mouseout", (event) => {
+                if (gameStarted) return
+
+                event.target.style.color = "silver"
+                event.target.style.cursor = ""
+
                 this.hideAll()
             })
 
             showMultipleBar.appendChild(div)
-        })
+        });
 
 
     },
@@ -251,11 +300,11 @@ const app = {
 
         let i = Math.floor(Math.random() * notes.length)
         randomNote = notes[i]
-        noteBoxDiv.innerText = "Find: " + randomNote
+        noteBoxDiv.innerText = randomNote
     },
     updatePoints(value) {
         points += value
-        pointsP.innerText = points
+        pointsP.innerText = "Your score: " + points + " points"
 
     },
     setupEventListerners() {
@@ -269,12 +318,10 @@ const app = {
                     this.updatePoints(1)
                     this.nextRound()
 
-                    // alert("ok")
                 } else {
                     setTimeout(() => {
                         event.target.style.setProperty('--noteDotOpacity', 0);
                     }, 1000)
-                    // alert("bad")
                 }
             }
         });
@@ -291,6 +338,7 @@ const app = {
                 }
             }
         });
+
         fretboard.addEventListener('mouseout', (event) => {
             if (noteHoverBlocked) return
 
@@ -304,8 +352,7 @@ const app = {
         });
 
         fretboard.addEventListener('click', (event) => {
-            console.log(event.target)
-        })
+        });
 
         selectedInstrumentSelector.addEventListener('change', (event) => {
             selectedInstrument = event.target.value;
@@ -346,7 +393,7 @@ const app = {
 
                 this.setupFretboard()
             })
-        })
+        });
 
         fretIncrease.addEventListener("click", () => {
             if (numberOfFrets < 24) {
@@ -354,7 +401,7 @@ const app = {
                 fretNumbersDiv.innerText = numberOfFrets
                 this.setupFretboard()
             }
-        })
+        });
 
         fretDecrease.addEventListener("click", () => {
             if (numberOfFrets > 3) {
@@ -362,7 +409,7 @@ const app = {
                 fretNumbersDiv.innerText = numberOfFrets
                 this.setupFretboard()
             }
-        })
+        });
 
         showAllCheckbox.addEventListener("input", (event) => {
             const noteFrets = document.querySelectorAll(".note-fret")
@@ -377,11 +424,11 @@ const app = {
                 })
                 noteHoverBlocked = false
             }
-        })
+        });
 
         showMultipleCheckbox.addEventListener("input", (event) => {
             showMultiple = event.target.checked
-        })
+        });
 
         resetTuningBt.addEventListener("click", () => {
             let defaultTuning = instrumentTuningPresetsDefault[selectedInstrument].slice()
@@ -390,20 +437,48 @@ const app = {
             this.createTuningSelects()
 
             this.setupFretboard()
-        })
+        });
 
         startGameBt.addEventListener("click", (event) => {
 
             if (gameStarted) {
+                this.endGame()
                 event.target.innerText = "PLAY GAME"
             } else {
                 this.startGame()
                 event.target.innerText = "END GAME"
             }
-        })
+        });
 
     }
+};
+
+
+const popup = {
+    popupDiv: document.querySelector(".game-popup"),
+    popupPointsH1: document.querySelector("#popup-points"),
+    popupTextH1: document.querySelector("#popup-text"),
+    closeBt: document.querySelector("#close-button"),
+    init() {
+        this.closeBt.addEventListener("click", () => {
+            this.hidePopup()
+        })
+    },
+    setPopupText(text) {
+        this.popupTextH1.innerText = text
+    },
+    showPopup() {
+        this.popupDiv.style.display = "block"
+    },
+    hidePopup() {
+        this.popupDiv.style.display = "none"
+    },
+    setPoints(points) {
+        this.popupPointsH1.innerText = "Points: " + points
+    }
 }
+
+popup.init()
 
 
 
@@ -415,7 +490,7 @@ const tools = {
         }
         return element;
     }
-}
+};
 
 
 app.init();

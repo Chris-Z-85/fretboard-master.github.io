@@ -53,7 +53,6 @@
         <div class="settings-element">
             <label for="tuning-selector">Tuning:</label>
             <div id="tuning-selectors">
-
             </div>
             <button id="reset-tuning">RESET</button>
         </div>
@@ -64,14 +63,18 @@
     </div>
 
     <div class="game-nav-container">
-        <div class="time-box">Time left: <p id="time">30</p> seconds</div>
-        <div class="note-box">Get ready!</div>
-        <div class="score-box">Your score: <p id="points">0</p> points</div>
+        <div class="time-box">
+            <p id="time"></p>
+        </div>
+        <div class="note-box"></div>
+        <div class="score-box">
+            <p id="points"></p>
+        </div>
     </div>
 
     <div class="fretboard"></div>
 
-    <div id="show-multiple-bar">C D♭ D E♭ E F G♭ G A♭ A B♭ B</div>
+    <div id="show-multiple-bar"></div>
 
     <div class="game-container">
         <button id="start-game-button">PLAY GAME</button>
@@ -79,15 +82,15 @@
 
     <div class="instructions">
         <h4>
-            The Fretboard Master is a tool designed to help you memorize the fret note names in an easy and fun way!
+            The Fretboard Master is a tool designed to help you memorize fret note names in an easy and fun way!
         </h4>
-        <p id="how_to_play">How to play? It’s easy!</p>
-        <p>When the note <i class="fas fa-music"></i> is displayed find it and clic on it on the fretboard. <i
-                class="fas fa-guitar"></i>
+        <p id="how_to_play">How to play the game? It’s easy!</p>
+        <p>When the note <i class="fas fa-music"></i> is displayed find and click it <i class="fas fa-mouse"></i>
+            on the fretboard <i class="fas fa-guitar"></i>
 
-            <p>Be quick you have only 30
+            <p>Be quick you - have only 15
                 seconds! <i class="fas fa-trophy"></i></p>
-            <p>Good luck!</p>
+            <p>Good luck! <i class="fas fa-thumbs-up"></i></p>
     </div>
 
     <footer>
@@ -96,6 +99,14 @@
             at
             <a href="https://www.spiced-academy.com/">SPICED Academy, </a>2020</p>
     </footer>
+
+    <div class="game-popup" id="myForm" style="display: none;">
+        <form action="" class="popup-container">
+            <h1 id="popup-text"></h1>
+            <h1 id="popup-points"></h1>
+            <button type="button" id="close-button">Close</button>
+        </form>
+    </div>
 
     <script src="./app.js"></script>
 </body>
