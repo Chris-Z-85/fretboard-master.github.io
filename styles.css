@@ -9,7 +9,6 @@
     --double-fretmark-position-1: calc(var(--fretboard-height) * 0.25);
     --double-fretmark-position-2: calc(var(--fretboard-height) * 0.75);
     --noteDotOpacity: 0;
-
 }
 
 * {
@@ -20,6 +19,7 @@
 body {
     background: #353535;
     font-family: 'Baloo 2', cursive;
+    height: 100%;
 }
 
 a:link {
@@ -62,7 +62,9 @@ footer {
 }
 
 .settings {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: center;
     color: silver;
@@ -71,7 +73,16 @@ footer {
     border-top: 1px solid #444;
     border-bottom: 1px solid #444;
     background: #282828;
-    /* font-family: 'Baloo 2' !important; */
+}
+
+#settings-lock{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #353535;
+    opacity: 0.7;
 }
 
 .settings-element {
@@ -199,7 +210,8 @@ label {
     font-size: x-large;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */
 }
 
 .instructions p {
@@ -208,7 +220,7 @@ label {
     letter-spacing: 1px;
 }
 
-#tuning-selectors select, #instrument-selector  {
+#tuning-selectors select, #instrument-selector {
     margin: 10px;
     background: #353535;
     color: silver;
@@ -223,7 +235,6 @@ label {
 option {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 
 #tuning-selectors select:hover, #instrument-selector:hover  {
     border-color: white;
@@ -250,15 +261,15 @@ option {
     font-weight: bold
 }
 
-#show-multiple-bar{
+#show-multiple-bar {
     color: silver;
     font-size: xx-large;
     text-align: center;
-    padding: 40px; 
+    margin-top: 40px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
 }
 
 .single-note{
@@ -270,8 +281,26 @@ option {
 
 .game-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    color: silver;
+    font-size: x-large;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.level-settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.level-settings label{
+    margin-left: 5px;
+    margin-right: 15px;
+
 }
 
 #start-game-button {
@@ -283,7 +312,8 @@ option {
     background: #fbc531;
     color: black;
     text-shadow:0px 1px 0px #e6d977;
-    font-weight: bold
+    font-weight: bold;
+    margin-bottom: 30px;
 }
 
 #start-game-button:active {
@@ -312,7 +342,7 @@ option {
     top: 40%;
     left: 45%;
     border: 3px solid black;
-    background-color: #282828;;
+    background-color: #282828;
     color: silver;
     border-radius: 15px;
     z-index: 9;
@@ -342,4 +372,14 @@ option {
     background: teal;
     color: silver;
     font-weight: bold
+  }
+
+#game-popup-overlay {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vmax;
+    background-color: grey;
+    opacity: 0.9;
+    z-index: 7;
   }

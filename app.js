@@ -21,6 +21,15 @@ const noteBoxDiv = document.querySelector(".note-box");
 const pointsP = document.querySelector("#points");
 const timeP = document.querySelector("#time");
 
+const settingsLockDiv = document.querySelector("#settings-lock");
+const levelRadio = document.querySelectorAll(".level");
+
+
+flatSharpSelector[0].checked = true
+levelRadio[0].checked = true
+showAllCheckbox.checked = false
+showMultipleCheckbox.checked = false
+
 
 
 let accidentals = "flats";
@@ -59,6 +68,8 @@ let points = 0;
 let interval;
 let timeout1;
 let timeout2;
+
+let startTime = 15;
 
 let actualTime = 15;
 let randomNote = "";
@@ -116,14 +127,16 @@ const app = {
     startGame() {
         gameStarted = true
 
+        this.setSettingsLocked()
 
-        actualTime = 15
+
+        actualTime = startTime
         noteBoxDiv.innerText = "Let's go!"
         timeout1 = setTimeout(() => {
             noteBoxDiv.innerText = "Find:"
 
             timeout2 = setTimeout(() => {
-                interval = setInterval(this.updateTime, 1000)
+                interval = setInterval(() => { this.updateTime() }, 1000)
                 this.setRandomNote()
 
                 timeP.innerText = "Time left: " + actualTime + " seconds"
@@ -143,11 +156,13 @@ const app = {
         popup.setPoints(points)
         popup.showPopup()
 
+        this.setSettingsUnlocked()
+
         pointsP.innerText = ""
         timeP.innerText = ""
         noteBoxDiv.innerText = ""
 
-        actualTime = 15
+        actualTime = startTime
         points = 0
     },
     nextRound() {
@@ -156,8 +171,10 @@ const app = {
         setTimeout(() => {
             clearInterval(interval)
             this.hideAll()
-            actualTime = 15
-            interval = setInterval(this.updateTime, 1000)
+
+            actualTime = startTime
+            timeP.innerText = "Time left: " + actualTime + ' seconds'
+            interval = setInterval(() => { this.updateTime() }, 1000)
             this.setRandomNote()
 
         }, 1000)
@@ -165,17 +182,23 @@ const app = {
 
     },
     updateTime() {
+
         actualTime -= 1
         timeP.innerText = "Time left: " + actualTime + ' seconds'
+
+
 
         if (actualTime == 0) {
             gameStarted = false
 
+            this.setSettingsUnlocked()
+
             pointsP.innerText = ""
             timeP.innerText = ""
             noteBoxDiv.innerText = ""
+            startGameBt.innerText = "START GAME"
 
-            actualTime = 15
+            actualTime = startTime
             points = 0
 
             popup.setPopupText("Time's up !")
@@ -183,6 +206,7 @@ const app = {
             popup.showPopup()
             clearInterval(interval)
         };
+
 
     },
     updateInstrumentTuning(index, indexOfNote) {
@@ -236,6 +260,12 @@ const app = {
             selectedInstrumentSelector.appendChild(instrumentOption);
         };
     },
+    setSettingsLocked() {
+        settingsLockDiv.style.display = "block"
+    },
+    setSettingsUnlocked() {
+        settingsLockDiv.style.display = "none"
+    },
     showMultiple(note) {
         const noteFrets = document.querySelectorAll(".note-fret")
 
@@ -270,6 +300,8 @@ const app = {
             div.addEventListener("mouseover", (event) => {
                 if (gameStarted) return
 
+                if (noteHoverBlocked) return
+
                 event.target.style.color = "#3498db"
                 event.target.style.cursor = "pointer"
 
@@ -278,6 +310,8 @@ const app = {
 
             div.addEventListener("mouseout", (event) => {
                 if (gameStarted) return
+
+                if (noteHoverBlocked) return
 
                 event.target.style.color = "silver"
                 event.target.style.cursor = ""
@@ -450,12 +484,25 @@ const app = {
             }
         });
 
+        console.log(levelRadio)
+        levelRadio.forEach(radio => {
+            radio.addEventListener("input", (event) => {
+                if (event.target.value == "easy") {
+                    startTime = 15
+                } else if (event.target.value == "medium") {
+                    startTime = 10
+                } else {
+                    startTime = 5
+                }
+            })
+        })
+
     }
 };
 
 
 const popup = {
-    popupDiv: document.querySelector(".game-popup"),
+    popupDiv: document.querySelector("#game-popup-overlay"),
     popupPointsH1: document.querySelector("#popup-points"),
     popupTextH1: document.querySelector("#popup-text"),
     closeBt: document.querySelector("#close-button"),
@@ -476,7 +523,7 @@ const popup = {
     setPoints(points) {
         this.popupPointsH1.innerText = "Points: " + points
     }
-}
+};
 
 popup.init()
 
