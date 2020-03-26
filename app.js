@@ -120,7 +120,7 @@ const app = {
         actualTime = 15
         noteBoxDiv.innerText = "Let's go!"
         timeout1 = setTimeout(() => {
-            noteBoxDiv.innerText = "Find!"
+            noteBoxDiv.innerText = "Find:"
 
             timeout2 = setTimeout(() => {
                 interval = setInterval(this.updateTime, 1000)
@@ -139,7 +139,7 @@ const app = {
         clearTimeout(timeout1)
         clearTimeout(timeout2)
 
-        popup.setPopupText("Game Over!")
+        popup.setPopupText("Game Over !")
         popup.setPoints(points)
         popup.showPopup()
 
@@ -178,7 +178,7 @@ const app = {
             actualTime = 15
             points = 0
 
-            popup.setPopupText("Time's up!")
+            popup.setPopupText("Time's up !")
             popup.setPoints(points)
             popup.showPopup()
             clearInterval(interval)
