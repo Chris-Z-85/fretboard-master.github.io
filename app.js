@@ -199,7 +199,7 @@ const app = {
             startGameBt.innerText = "START GAME"
 
             actualTime = startTime
-            points = 0
+            points
 
             popup.setPopupText("Time's up !")
             popup.setPoints(points)
@@ -538,5 +538,6 @@ const tools = {
         return element;
     }
 };
+
 
 app.init();
