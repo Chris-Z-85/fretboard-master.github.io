@@ -539,5 +539,4 @@ const tools = {
     }
 };
 
-
 app.init();
