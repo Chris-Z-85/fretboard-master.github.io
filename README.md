@@ -17,4 +17,4 @@ attended between January and March 2020 in Berlin, Germany.
 
  ## Preview
  
-![Project Image](https://github.com/Chris-Z-85/connect-four/blob/master/fretboardmaster/fretboardmaster.gif?raw=true)
+![Project Image](https://github.com/Chris-Z-85/fretboard-master.github.io/blob/master/fretboardmaster.gif?raw=true)
