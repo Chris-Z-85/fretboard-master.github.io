@@ -17,8 +17,8 @@ attended between January and March 2020 in Berlin, Germany.
 
  ## Features
  
- * Switch between flats and sharps
- * Choose from Guitar, Bass, Ukulele
+* Switch between flats and sharps
+* Choose from Guitar, Bass (4 strings), Bass (5 strings) and Ukulele
 * Adjust the number of frets
 * See all notes on the fretboard
 * Show multiple - one note everywhere on the fretboard
