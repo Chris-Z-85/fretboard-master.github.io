@@ -2,6 +2,8 @@
 
 Memorize fretboard notes the fun way!
 
+www: https://chris-z-85.github.io/fretboard-master.github.io/
+
 ## Built with
 
  * HTML 5
