@@ -21,5 +21,5 @@ Deployed: :arrow_right: [Here](https://chris-z-85.github.io/fretboard-master.git
 
 ## Preview
  
-![Project Image](https://github.com/Chris-Z-85/fretboard-master.github.io/blob/master/fretboardmaster.gif?raw=true)
 
+![Project Image](https://github.com/Chris-Z-85/connect-four/blob/master/fretboardmaster/fretboardmaster.webp?raw=true)
